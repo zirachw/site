@@ -1,0 +1,416 @@
+/*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+
+/* Light mode (default) */
+:root {
+  --color-background: #ffffff;
+  --color-background-secondary: #f8f8f8;
+  --color-text: #000000;
+  --color-text-secondary: #4c4c4c;
+  --color-text-muted: #666666;
+  --color-text-subtle: #888888;
+  --color-border: rgba(0, 0, 0, 0.1);
+  --color-shadow: rgba(0, 0, 0, 0.3);
+  --color-shadow-light: rgba(0, 0, 0, 0.1);
+  --color-overlay: rgba(0, 0, 0, 0.5);
+  --color-hover: rgba(0, 0, 0, 0.1);
+  --color-chip-bg: #f3f4f6;
+  --color-chip-text: #374151;
+  --color-category-gradient-start: #000;
+  --color-category-gradient-end: #666;
+}
+
+/* Dark mode */
+.dark {
+  --color-background: #121212;
+  --color-background-secondary: #1e1e1e;
+  --color-text: #ffffff;
+  --color-text-secondary: #e0e0e0;
+  --color-text-muted: #a0a0a0;
+  --color-text-subtle: #888888;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-shadow: rgba(0, 0, 0, 0.5);
+  --color-shadow-light: rgba(0, 0, 0, 0.3);
+  --color-overlay: rgba(0, 0, 0, 0.7);
+  --color-hover: rgba(255, 255, 255, 0.1);
+  --color-chip-bg: #2d2d2d;
+  --color-chip-text: #e0e0e0;
+  --color-category-gradient-start: #fff;
+  --color-category-gradient-end: #aaa;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  line-height: inherit;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+/* Uncomment this if we want preserve space for scrollbar, even no needed */
+
+/* html {
+  scrollbar-gutter: stable;
+} */
+
+html:has([data-disable-document-scroll="true"]) {
+  overflow: hidden;
+}
+body {
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  line-height: calc(0.95 + 0.62rem);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Main container */
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 3rem;
+}
+
+@media (max-width: 768px) {
+  main {
+    padding: 1.5rem 1rem;
+  }
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+}
+
+h1 {
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+/* ---------------------------------------- */
+/* ---------- Blog custom styles ---------- */
+/* ---------------------------------------- */
+
+* {
+  /* Cartograph comes with built-in ligatures for stuff like "=>". I don't want them. */
+  -webkit-font-variant-ligatures: no-common-ligatures;
+  font-variant-ligatures: no-common-ligatures;
+}
+
+/* Scrollbar and selection styles */
+:root {
+  --selection-background-color: hsl(50deg 100% 78%);
+  --selection-text-color: black;
+  --scrollbar-bg: #ffffff;
+  --scrollbar-thumb: #c0c0c0;
+  --scrollbar-thumb-hover: #a0a0a0;
+}
+.dark {
+  --selection-background-color: hsl(250deg 20% 60% / 0.35);
+  --selection-text-color: inherit;
+  --scrollbar-bg: #121212;
+  --scrollbar-thumb: #555555;
+  --scrollbar-thumb-hover: #777777;
+}
+::selection {
+  background-color: var(--selection-background-color);
+  color: var(--selection-text-color);
+}
+
+@media (min-device-width: 600px) {
+  /*
+    Ugh, so this property OVERRULES the webkit properties in Windows, causing the nice scrollbars to be replaced with standard square ones. They do inherit the correct colors, but none of the other styles.
+
+    That said, without this property, Firefox gets no scrollbar colors at all. And maybe I should be respecting platform defaults.
+  */
+  * {
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg);
+  }
+
+  ::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+    background-color: var(--scrollbar-bg);
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+    background-color: var(--scrollbar-bg);
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 3px;
+    background-color: var(--scrollbar-bg);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: var(--scrollbar-thumb);
+    border: 2px solid var(--scrollbar-bg);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-thumb-hover);
+  }
+}
+
+html {
+  color: var(--color-text);
+  background-color: var(--color-background);
+  transition: --color-background var(--color-swap-duration) var(--color-swap-timing-function),
+    --color-text var(--color-swap-duration) var(--color-swap-timing-function);
+}
+
+body {
+  --font-weight-bold: 600;
+  --font-weight-medium: 500;
+  --font-weight-light: 300;
+
+  --font-family: var(--font-lora), Georgia, serif;
+  --font-family-mono: ui-monospace, "Cascadia Code", "Fira Code", monospace;
+  --font-family-sans: var(--font-inter), system-ui, sans-serif;
+
+  --viewport-padding: 32px;
+
+  /*
+    Normally for spring animations, I want to use React Spring.
+    In certain cases, however, it's more performant to use native CSS transitions (eg. if there's a bunch of other DOM manipulation happening at the same time). In those cases, I can use these CSS variables to keep the springy feel:
+  */
+  --springy-spring-easing: linear(
+    0,
+    0.1407 4.43%,
+    0.9383 16.72%,
+    1.0774 20.43%,
+    1.1493 24.31%,
+    1.1629 26.95%,
+    1.1536 29.93%,
+    1.0168 43.09%,
+    0.9766 51%,
+    1.0033 76.88%,
+    1
+  );
+  --springy-spring-duration: 833ms;
+
+  font-family: var(--font-family);
+}
+
+/*
+  We want to shrink the amount of space around the content on smaller screens.
+  HACK: 35.1875rem is equivalent to the `sm` breakpoint in constants.ts. Ideally I would set this value in JS so that I could re-use that value, but I don't yet have a way to set global styles in JS in this project.
+*/
+@media (max-width: 35.1875rem) {
+  body {
+    --viewport-padding: 16px;
+  }
+}
+
+/* UnstyledButton by default! */
+button {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  outline-color: var(--color-primary);
+}
+a {
+  outline-color: var(--color-primary);
+}
+
+kbd {
+  display: inline-block;
+  font-family: var(--font-family-mono);
+  font-size: 0.9375em;
+  padding: 0px 10px;
+  margin: 1px -1px;
+  border-bottom: 3px solid var(--kbd-border-color);
+  border-radius: 3px 3px 5px 5px;
+  background-color: var(--kbd-background-color);
+  transition: var(--color-mode-transition);
+  cursor: default;
+}
+
+/* Common animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes fadeToOpaque {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeFromOpaque {
+  from {
+    opacity: 1;
+  }
+}
+@keyframes fadeToTransparent {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes fadeFromTransparent {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes hueShift {
+  to {
+    filter: hue-rotate(var(--to-hue));
+  }
+}
+@keyframes colorShift {
+  to {
+    background: var(--to-color);
+  }
+}
+
+@keyframes fromRestingPosition {
+  from {
+    transform: translate(0, 0);
+  }
+}
+@keyframes fromShrunken {
+  from {
+    transform: scale(0);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes slideFromHorizontal {
+  from {
+    transform: translateX(var(--slide-val, -100%));
+  }
+}
+@keyframes slideToHorizontal {
+  to {
+    transform: translateX(var(--slide-val, 100%));
+  }
+}
+@keyframes slideFromVertical {
+  from {
+    transform: translateY(var(--slide-val, -100%));
+  }
+}
+@keyframes slideToVertical {
+  to {
+    transform: translateY(var(--slide-val, 100%));
+  }
+}
+
+/*
+  HACK: This should be in the `ModalSearch` component, but if I put it with the style definitions, it doesn't seem to work.
+*/
+@keyframes searchModalLeave {
+  to {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+}
+::view-transition-old(search-modal) {
+  animation: searchModalLeave 500ms both;
+  animation-delay: 250ms;
+}
+::view-transition-old(search-modal-content) {
+  animation: fadeOut 340ms both;
+}
+::view-transition-old(search-modal-selected-result) {
+  animation: fadeOut 600ms both;
+  animation-delay: 150ms;
+}
+
+/* Remove the vertical translate for motion-intolerant folks */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(search-modal) {
+    animation: fadeOut 500ms both;
+  }
+}
+
+@keyframes dismissNavDropdown {
+  to {
+    transform: translateY(-8px);
+    opacity: 0;
+  }
+}
+@keyframes navTipFlatten {
+  /* HACK: A weird sub-pixel gap opens up without the 0.1px offset */
+  from {
+    transform: translateY(0.1px) scaleY(1);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-8.1px) scaleY(0.2);
+    opacity: 0;
+  }
+}
+::view-transition-old(navigation-dropdown) {
+  animation: dismissNavDropdown 300ms forwards;
+}
+::view-transition-old(navigation-tip) {
+  animation: navTipFlatten 300ms forwards;
+  transform-origin: center bottom;
+}
+
+/* Fonts loaded via next/font/google in layout.tsx */
+
+.grecaptcha-badge {
+  display: none !important;
+}
