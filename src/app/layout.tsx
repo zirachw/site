@@ -3,6 +3,8 @@ import { Inter, Lora } from "next/font/google";
 import { styled } from "@linaria/react";
 import "./globals.css";
 
+import Navbar from "@/components/Navbar";
+
 const lora = Lora({
   variable: "--font-lora",
   subsets: ["latin"],
@@ -14,6 +16,7 @@ const inter = Inter({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
 });
+
 export const metadata: Metadata = {
   title: "Razi's Personal Site",
   description: "Lifetime Project :)",
@@ -27,6 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-color-mode="light">
       <body className={`${lora.variable} ${inter.variable}`}>
+        <Navbar />
         <Main>{children}</Main>
       </body>
     </html>
