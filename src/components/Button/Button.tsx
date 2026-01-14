@@ -27,12 +27,19 @@ function Button({
   );
 
   if (href) {
+    if (disabled) {
+      // even if href is provided
+      return variant === "project" ? (
+        <ProjectBtn $disabled={disabled}>{content}</ProjectBtn>
+      ) : (
+        <DefaultBtn>{content}</DefaultBtn>
+      );
+    }
+
     return variant === "simple" ? (
       <SimpleLink href={href}>{content}</SimpleLink>
     ) : variant === "project" ? (
-      <ProjectLink href={href} $disabled={disabled}>
-        {content}
-      </ProjectLink>
+      <ProjectLink href={href}>{content}</ProjectLink>
     ) : (
       <DefaultLink href={href}>{content}</DefaultLink>
     );
@@ -106,7 +113,7 @@ const simpleVariant = `
 
 const projectVariant = `
   background-color: var(--color-text-muted);
-  color: white;
+  color: var(--color-background);
   border: none;
   padding: 0.625rem;
   font-size: 0.85rem;
@@ -161,18 +168,10 @@ const ProjectBtn = styled.button<{ $disabled?: boolean }>`
   }
 `;
 
-const ProjectLink = styled(Link)<{ $disabled?: boolean }>`
+const ProjectLink = styled(Link)`
   --css-file: button;
   ${baseStyles}
   ${projectVariant}
-  background-color: ${(props) => (props.$disabled ? "#999" : "var(--color-text-muted)")};
-  cursor: ${(props) => (props.$disabled ? "default" : "pointer")};
-  pointer-events: ${(props) => (props.$disabled ? "none" : "auto")};
-
-  &:hover {
-    background-color: ${(props) => (props.$disabled ? "#999" : "var(--color-text)")};
-    transform: ${(props) => (props.$disabled ? "none" : "translateY(-2px)")};
-  }
 `;
 
 const Icon = styled.span`
