@@ -2,30 +2,15 @@
 
 import { styled } from "@linaria/react";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useTheme } from "@/components/ThemeProvider";
 
 function Navbar() {
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    if (typeof window === "undefined") return false;
-    const savedMode = localStorage.getItem("darkMode");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    return savedMode ? savedMode === "true" : prefersDark;
-  });
+  const { theme, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [isDarkMode]);
-
   const toggleDarkMode = () => {
-    const newMode = !isDarkMode;
-    setIsDarkMode(newMode);
-    document.documentElement.classList.toggle("dark");
-    localStorage.setItem("darkMode", String(newMode));
+    toggleTheme();
   };
 
   const toggleMenu = () => {
@@ -49,7 +34,7 @@ function Navbar() {
 
       <RightSection>
         <DarkModeButton onClick={toggleDarkMode} aria-label="Toggle dark mode">
-          {isDarkMode ? (
+          {theme === "dark" ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
